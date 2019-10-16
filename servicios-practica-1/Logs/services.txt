@@ -1,0 +1,25 @@
+UNIT FILE                          STATE  
+cups.path                          enabled
+autovt@.service                    enabled
+avahi-daemon.service               enabled
+console-setup.service              enabled
+cron.service                       enabled
+cups-browsed.service               enabled
+cups.service                       enabled
+dbus-org.freedesktop.Avahi.service enabled
+getty@.service                     enabled
+keyboard-setup.service             enabled
+networking.service                 enabled
+rsyslog.service                    enabled
+ssh.service                        enabled
+sshd.service                       enabled
+syslog.service                     enabled
+systemd-timesyncd.service          enabled
+vsftpd.service                     enabled
+avahi-daemon.socket                enabled
+cups.socket                        enabled
+remote-fs.target                   enabled
+apt-daily-upgrade.timer            enabled
+apt-daily.timer                    enabled
+
+22 unit files listed.

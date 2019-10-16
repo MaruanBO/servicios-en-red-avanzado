@@ -1,0 +1,3 @@
+journalctl -t sshd -o json-pretty
+385
+systemd-journald
