@@ -1,18 +1,24 @@
 ## Tabla de contenidos
 0. [Introducción](#intro)
+
 1. [Systemctl](#system)
-    2. [Servicios](#servicios)
-    3. [Ejecución](#ejecucion)
+    + [Servicios](#servicios)
+    + [Ejecución](#ejecucion)
+
 2. [SSH](#ssh)
-    1. [Puerto](#port)
-    2. [Lista](#list)
-    3. [Logs](#logs)
-    4. [Conexión](#test)
+    + [Puerto](#port)
+    + [Lista](#list)
+    + [Logs](#logs)
+    + [Conexión](#test)
+
 3. [Journal](#journal)
-    1. [Persistente](#journalp)
+    + [Persistente](#journalp)
+
 4. [Netstat](#netstat)
-    1. [Puertos](#netstatp)
+    + [Puertos](#netstatp)
+
 5. [Conclusión](#conclusion)
+
 6. [Fuentes](#fuentes)
 
 <div id='intro'/>
@@ -128,8 +134,17 @@ Modificaremos la directiva AllowUsers permitiendo acceso al usuario root junto c
 ```
 $ AllowUsers allowssh root
 $ allowssh y root son dos usuarios del sistema.
-$ PermitRootLogin yes
 ```
+Configuraremos el usuario root para que acceda sin clave mediante la clave publica
+```
+$ PermitRootLogin without-password
+```
+Copiaremos la clave publica del cliente hacia el usuario root mediante el siguiente comando
+
+```
+ssh-copy-id -i id-rsa.pub root@192.168.1.2 -p 21
+```
+Una vez copiada debemos de dejar la directiva PasswordAuthentication yes, si cambiamos el valor a "no" no podremos acceder mediante otros usuarios.
 
 <div id='logs'/>
 
@@ -149,14 +164,14 @@ ___
 
 Veremos las siguientes comprobaciónes
 1. Exitosa
-    1. Root
-    ![SUCESSFULL](Imagenes/root.png)
-    2. Allowssh
-    ![SUCESSFULL](Imagenes/allowssh.png)
+    + Root
+        ![SUCESSFULL](Imagenes/root.png)
 
-2. Erronea
-    1. Deniedssh
-    ![FAIL](Imagenes/deniedssh.png)
+    + Allowssh
+        ![SUCESSFULL](Imagenes/allowssh.png)
+2. Erronea   
+    + Deniedssh
+        ![FAIL](Imagenes/deniedssh.png)
 
 <div id='journal'/>
 
