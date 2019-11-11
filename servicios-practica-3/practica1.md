@@ -1,14 +1,17 @@
 ## Tabla de contenidos
 0. [Introducción](#intro)
 
-1. [Systemctl](#system)
-    + [Servicios](#servicios)
-    + [Ejecución](#ejecucion)
+1. [Proxmox](#proxmox)
+    + [Instalación](#install)
 
+2. [NFS](#nfs)
+3. [Cluster](#cluster)
+4. [NAT](#nat)
+5. [Containers](#container)
+6. [Migración](#migracion)
+7. [Conclusión](#conclusion)
 
-5. [Conclusión](#conclusion)
-
-6. [Fuentes](#fuentes)
+8. [Fuentes](#fuentes)
 
 <div id='intro'/>
 
@@ -30,7 +33,7 @@ Necesitaras:
 + Tantas maquinas virtuales como nodos haya en el cluster.
 + Una maquina central que contendrá nfs y nat.
 
-<div id='system'/>
+<div id='proxmox'/>
 
 ## 1. Proxmox
 Proxmox es una solución de codigo libre implementada para la implementacion de virtualización de servidores.
@@ -53,7 +56,7 @@ Proxmox para dar acceso internet a los equipos usa el modo puente entre los disp
 
 Necesitaremos dos servidores proxmox.
 
-<div id='NFS'/>
+<div id='nfs'/>
 
 ## 2. NFS
 NFS es un sistema de archivos en red, para su configuración en V4 bajo Debian (Maquina central) necesitaremos tener instalado los siguientes paquetes:
@@ -81,6 +84,7 @@ La opción "a" exporta todos los directorios hayados en "etc/exports".
 Añadiremos NFS mediante el entorno web, para darle algún uso simplemente:
 ![NODO](Imagenes/NFS.png)
 
+<div id='cluster'/>
 
 ## 3. Cluster
 Un cluster en proxmox es un conjunto de servidores.
@@ -110,6 +114,7 @@ Editaremos el fichero "etc/hosts" de la maquina central añadiendo el nombre y i
 192.168.1.147     proxmox1.100
 192.168.1.146     proxmox2.101
 ```
+<div id='nat'/>
 
 ## 4. Nat
 Nat se encarga de realizar la traducción de dirección privada a publica. Por lo anteriormente explicado se sobre-entiende porque lo necesitamos.
@@ -152,6 +157,8 @@ MASQUERADE  all  --  192.168.1.0/24       anywhere
 ```
 
 Para hacer que los containers salgan atraves de la maquina central, deberemos de hacer que su puerta de enlace sea la IP de la maquina central.
+
+<div id='container'/>
 
 ## 5. Creación de los containers
 Un container es una forma de virtualizar completamente un sistema operativo usando el OS del anfitrion haciendo uso del kernel.
@@ -218,6 +225,7 @@ Una vez dentro crearemos un usuario mediante:
 $ adduser mar
 $ passwdo mar
 ```
+<div id='migracion'/>
 
 ## 6. Migración
 La migración de un nodo en pocas palabras consiste en mover el disco duro de un contenedor a otro nodo.
