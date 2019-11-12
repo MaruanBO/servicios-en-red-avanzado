@@ -185,7 +185,7 @@ Guardaremos la plantilla en el servidor NFS "/mnt/pve/nfsproxmox/template/cache/
 Crearemos el contenedor mediante la siguiente sintaxis:
 
 ```
-$ pct create 100 nfsproxmox:2/debian-8.0-standard_8.0-1_amd64.tar.gz
+$ pct create 100 nfsproxmox:2/debian-8.0-standard_8.0-1_amd64.tar.gz --storage /mnt/pve/nfsproxmox/images/
 ```
 
 Salida del comando:
