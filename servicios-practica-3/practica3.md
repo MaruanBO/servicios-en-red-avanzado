@@ -83,6 +83,8 @@ La opción "a" exporta todos los directorios hayados en "etc/exports".
 
 Añadiremos NFS mediante el entorno web, para darle algún uso simplemente:
 ![NODO](Imagenes/NFS.png)
+
+
 En el contenido debemos de especificar:
 + Template
 + Iso
