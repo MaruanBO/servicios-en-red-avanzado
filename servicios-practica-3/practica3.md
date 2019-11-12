@@ -82,6 +82,8 @@ exportfs -a
 La opción "a" exporta todos los directorios hayados en "etc/exports".
 
 Añadiremos NFS mediante el entorno web, para darle algún uso simplemente:
+
+
 ![NODO](Imagenes/NFS.png)
 
 
@@ -109,6 +111,7 @@ Debemos de tener claro que el cluster esta creado en "proxmox1" por lo que es lo
 $ pvecm add 192.168.1.142
 ```
 Salida del comando:
+
 ![NODO](Imagenes/addnode.png)
 
 Editaremos el fichero "etc/hosts" de la maquina central añadiendo el nombre y ip de los nodos, para asín tener DNS estático.
