@@ -33,7 +33,7 @@ Todo los archivos usados están disponibles en este repositorio para su visión 
 
 ## 1. SYSTEMCTL
 ___
-Se trata de una herramienta dedicada a la administración de servicios en sistemas linux. Resulta muy util ya que podremos detectar cualquier tipo de incongruencia que nos puede encandenar a problemas de intengridad
+Se trata de una herramienta dedicada a la administración de servicios en sistemas linux. Resulta muy util ya que podremos detectar cualquier tipo de incongruencia que nos puede encandenar a problemas de intengridad.
 
 <div id='servicios'/>
 
