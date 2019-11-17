@@ -1,9 +1,7 @@
 ## Tabla de contenidos
 0. [Introducción](#intro)
-
 1. [Proxmox](#proxmox)
     + [Instalación](#install)
-
 2. [NFS](#nfs)
 3. [Cluster](#cluster)
 4. [NAT](#nat)
