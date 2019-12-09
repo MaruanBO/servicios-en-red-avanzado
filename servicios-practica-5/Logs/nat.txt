@@ -1,0 +1,18 @@
+root@debian:/etc/iptables# iptables --table nat --append POSTROUTING --out-interface ens33 -j MASQUERADE
+root@debian:/etc/iptables# iptables --append FORWARD --in-interface ens33 -j ACCEPT
+root@debian:/etc/iptables# iptables -t nat -L
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination         
+MASQUERADE  all  --  anywhere             anywhere            
+root@debian:/etc/iptables# 
+
+
