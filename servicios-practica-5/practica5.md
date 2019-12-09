@@ -1,6 +1,5 @@
 ## Tabla de contenidos
 0. [Introducción](#intro)
-
 1. [Ceph](#proxmox)
     + [Instalación](#install)
 2. [NTP](#ntp)
@@ -153,7 +152,7 @@ remote           refid   	st t when poll reach    delay  offset  jitter
 ```
 <div id='hdd'/>
 
-## 3.Discos duros
+## 3. Discos duros
 Antes de configurar ceph necesitaremos tener los discos duros correctamente configurados, para poder añadirlos al pool de ceph. Este termino se le conoce como osd.
 Debido a que son 1 disco duro por maquina y disponemos de 3 maquinas, realizaremos el mismo proceso en los 3 equipos.
 Para conocer los discos duros que disponemos en nuestro equipo usaremos el comando:
@@ -256,6 +255,10 @@ Verificación final del estado de ceph
 $ root@proxmox1:~# ceph health
 HEALTH_OK
 ```
+<div id='migracion'/>
+
+## 6. Migración
+
 <div id='conclusion'/>
 
 ## 7. Conclusión
