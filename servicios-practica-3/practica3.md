@@ -1,9 +1,7 @@
 ## Tabla de contenidos
 0. [Introducción](#intro)
-
 1. [Proxmox](#proxmox)
     + [Instalación](#install)
-
 2. [NFS](#nfs)
 3. [Cluster](#cluster)
 4. [NAT](#nat)
@@ -82,7 +80,16 @@ exportfs -a
 La opción "a" exporta todos los directorios hayados en "etc/exports".
 
 Añadiremos NFS mediante el entorno web, para darle algún uso simplemente:
+
+
 ![NODO](Imagenes/NFS.png)
+
+
+En el contenido debemos de especificar:
++ Template
++ Iso
++ Disk Image
++ Container
 
 <div id='cluster'/>
 
@@ -102,7 +109,8 @@ Debemos de tener claro que el cluster esta creado en "proxmox1" por lo que es lo
 $ pvecm add 192.168.1.142
 ```
 Salida del comando:
-![NODO](Imagenes/NFS.png)
+
+![NODO](Imagenes/addnode.png)
 
 Editaremos el fichero "etc/hosts" de la maquina central añadiendo el nombre y ip de los nodos, para asín tener DNS estático.
 
@@ -187,11 +195,11 @@ Filesystem UUID: efa65580-285f-4c11-a358-48618457cfca
 Superblock backups stored on blocks: 
 	32768, 98304, 163840, 229376, 294912
 
-Allocating group tables:  0/16     done                            
-Writing inode tables:  0/16     done                            
+Allocating group tables:  0/16     done                            
+Writing inode tables:  0/16    done                            
 Creating journal (16384 blocks): done
 Multiple mount protection is enabled with update interval 5 seconds.
-Writing superblocks and filesystem accounting information:  0/16     done
+Writing superblocks and filesystem accounting information:  0/16     done
 
 extracting archive '/mnt/pve/nfsproxmox/template/cache/centos-7-default_20190926_amd64.tar.xz'
 Total bytes read: 422809600 (404MiB, 27MiB/s)
