@@ -1,0 +1,140 @@
+conf local
+---
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "maruan.sri.iesiliberis.com" {
+ type master;
+ file "/etc/bind/zones/db.maruan.sri.iesiliberis.com";
+};
+
+zone "2.10.10.in-addr.arpa" {
+ type master;
+ file "/etc/bind/zones/db.10.10.2.0";
+};
+
+conf options
+---
+options {
+        directory "/var/cache/bind";
+        auth-nxdomain no;    # conform to RFC1035
+        listen-on port 53 { localhost; 10.10.2.0/24; };
+        allow-query { localhost; 10.10.2.0/24; };
+        forwarders { 8.8.8.8; };
+        recursion yes;
+	listen-on { any; };
+	listen-on-v6 {  any; };
+};
+
+
+conf maruan.sri.iesiliberis.com
+---
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     maruan.sri.iesiliberis.com. root.maruan.sri.iesiliberis.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+ 
+@       IN      NS      ns1.maruan.sri.iesiliberis.com.
+@       IN      NS      ns2.maruan.sri.iesiliberis.com.
+@       IN      A       10.10.2.10
+@	IN	AAAA	fec0:cafe:10::
+ns1	IN	A	10.10.2.10
+ns2     IN      A       10.10.2.10
+ns1	IN	AAAA	fec0:cafe:10::
+ns2	IN	AAAA	fec0:cafe:10::
+
+conf db.10.10.2.0 
+------
+;
+; BIND reverse data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     maruan.sri.iesiliberis.com. root.maruan.sri.iesiliberis.com. (
+                              1         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+        IN      NS      ns1.maruan.sri.iesiliberis.com.
+        IN      NS      ns2.maruan.sri.iesiliberis.com.
+ns1     IN      A       10.10.2.10
+ns2     IN      A       10.10.2.10
+ns1	IN	AAAA	fec0:cafe::10
+ns2	IN	AAAA	fec0:cafe::10
+@       IN      A       10.10.2.10
+@	IN	AAAA	fec0:cafe::10
+10       IN      PTR    maruan.sri.iesiliberis.com.
+
+
+named-checkconf
+----
+zone 2.10.10.in-addr-arpa/IN: loaded serial 1
+OK
+
+named-checkconf
+----
+zone ns1.iesiliberis.com/IN: loaded serial 2
+OK
+zone ns1.iesiliberis.com/IN: loaded serial 2
+OK
+
+nslookup inv
+---
+Server:		10.10.2.10
+Address:	10.10.2.10#53
+
+10.2.10.10.in-addr.arpa	name = maruan.sri.iesiliberis.com.
+
+nslookup domain
+---
+Server:		10.10.2.10
+Address:	10.10.2.10#53
+
+Name:	maruan.sri.iesiliberis.com
+Address: 10.10.2.10
+
+dig 
+----
+
+; <<>> DiG 9.10.3-P4-Debian <<>> maruan.sri.iesiliberis.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 7818
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 5
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;maruan.sri.iesiliberis.com.	IN	A
+
+;; ANSWER SECTION:
+maruan.sri.iesiliberis.com. 604800 IN	A	10.10.2.10
+
+;; AUTHORITY SECTION:
+maruan.sri.iesiliberis.com. 604800 IN	NS	ns2.maruan.sri.iesiliberis.com.
+maruan.sri.iesiliberis.com. 604800 IN	NS	ns1.maruan.sri.iesiliberis.com.
+
+;; ADDITIONAL SECTION:
+ns1.maruan.sri.iesiliberis.com.	604800 IN A	10.10.2.10
+ns1.maruan.sri.iesiliberis.com.	604800 IN AAAA	fec0:cafe:10::
+ns2.maruan.sri.iesiliberis.com.	604800 IN A	10.10.2.10
+ns2.maruan.sri.iesiliberis.com.	604800 IN AAAA	fec0:cafe:10::
+
+;; Query time: 0 msec
+;; SERVER: 10.10.2.10#53(10.10.2.10)
+;; WHEN: Thu Dec 05 22:40:36 CET 2019
+;; MSG SIZE  rcvd: 195
+

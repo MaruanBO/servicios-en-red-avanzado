@@ -1,0 +1,51 @@
+Configuración
+_________________________________
+root@maruan:/etc/bind# mkdir keys
+root@maruan:/etc/bind# dnssec-keygen -K /etc/bind/keys/ -a ECDSAP256SHA256 -3 -f KSK maruan.sri.iesiliberis.com
+Generating key pair.
+Kmaruan.sri.iesiliberis.com.+013+54569
+root@maruan:/etc/bind# chmod 640 /etc/bind/keys/*
+root@maruan:/etc/bind# rndc reconfig
+root@maruan:/etc/bind# rndc signing -nsec3param 1 0 10 $(head -c 512 /dev/urandom | sha1sum | cut -b 1-16) maruan.sri.iesiliberis.com
+request queued
+root@maruan:/etc/bind# dnssec-dsfromkey -2 /etc/bind/keys/Kmaruan.sri.iesiliberis.com.+013+54569.key 
+maruan.sri.iesiliberis.com. IN DS 54569 13 2 8E3DEE982CD87BFAE73F499E6FE549BAD6025EF9B2A31C0208512166692D3F4E
+root@maruan:/etc/bind#  rndc reconfig
+Configuracion zona inversa
+__________________________
+root@maruan:/etc/bind# dnssec-keygen -K /etc/bind/keys/ -a ECDSAP256SHA256 -3 -f KSK 2.10.10.in-addr.arpa
+Generating key pair.
+K2.10.10.in-addr.arpa.+013+54841
+root@maruan:/etc/bind#  rndc reconfig
+root@maruan:/etc/bind# rndc signing -nsec3param 1 0 10 $(head -c 512 /dev/urandom | sha1sum | cut -b 1-16) 2.10.10.in-addr.arpa
+request queued
+root@maruan:/etc/bind# dnssec-dsfromkey -2 /etc/bind/keys/K
+K2.10.10.in-addr.arpa.+013+54841.key            Kmaruan.sri.iesiliberis.com.+013+54569.key      
+K2.10.10.in-addr.arpa.+013+54841.private        Kmaruan.sri.iesiliberis.com.+013+54569.private  
+root@maruan:/etc/bind# dnssec-dsfromkey -2 /etc/bind/keys/K2.10.10.in-addr.arpa.+013+54841.key 
+2.10.10.in-addr.arpa. IN DS 54841 13 2 FC47372ECFDCC5012823695987B2903F981CF6503079BBC9BBBAC9328E68CC18
+root@maruan:/etc/bind# rndc reconfig
+
+Verificación de la configuracion
+________________________________
+root@maruan:/etc/bind# systemctl status bind9
+● bind9.service - BIND Domain Name Server
+   Loaded: loaded (/lib/systemd/system/bind9.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2019-12-11 18:36:52 CET; 3min 22s ago
+     Docs: man:named(8)
+  Process: 2240 ExecStop=/usr/sbin/rndc stop (code=exited, status=0/SUCCESS)
+ Main PID: 2245 (named)
+    Tasks: 7 (limit: 19660)
+   CGroup: /system.slice/bind9.service
+           └─2245 /usr/sbin/named -f -u bind
+
+dic 11 18:36:59 maruan named[2245]: all zones loaded
+dic 11 18:36:59 maruan named[2245]: running
+dic 11 18:36:59 maruan named[2245]: zone 2.10.10.in-addr.arpa/IN (signed): reconfiguring zone keys
+dic 11 18:36:59 maruan named[2245]: zone maruan.sri.iesiliberis.com/IN (signed): reconfiguring zone keys
+dic 11 18:36:59 maruan named[2245]: zone 2.10.10.in-addr.arpa/IN (signed): next key event: 11-Dec-2019 19:36:59.519
+dic 11 18:36:59 maruan named[2245]: zone maruan.sri.iesiliberis.com/IN (signed): next key event: 11-Dec-2019 19:36:59.519
+dic 11 18:37:40 maruan named[2245]: client 10.10.2.101#57097 (maruan.sri.iesiliberis.com): transfer of 'maruan.sri.iesiliberis.com/IN': AXFR started (serial 9)
+dic 11 18:37:40 maruan named[2245]: client 10.10.2.101#57097 (maruan.sri.iesiliberis.com): transfer of 'maruan.sri.iesiliberis.com/IN': AXFR ended
+dic 11 18:38:29 maruan named[2245]: client 10.10.2.101#56929 (2.10.10.in-addr.arpa): transfer of '2.10.10.in-addr.arpa/IN': AXFR started (serial 16)
+dic 11 18:38:29 maruan named[2245]: client 10.10.2.101#56929 (2.10.10.in-addr.arpa): transfer of '2.10.10.in-addr.arpa/IN': AXFR ended
