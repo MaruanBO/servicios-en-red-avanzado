@@ -19,7 +19,7 @@ while line:
 	username=raw_input('Enter username: ')
 	password=raw_input('Enter password: ')
 	#Compara los datos introducidos con la clave del fichero
-	if username == user or password == passwd:
+	if username == user and password == passwd:
 		print("Bienvenido: "+user)
 		break
 	else:

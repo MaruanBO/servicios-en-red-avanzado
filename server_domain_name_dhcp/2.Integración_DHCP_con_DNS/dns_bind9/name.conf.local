@@ -1,0 +1,19 @@
+include "/etc/bind/ddns.key";
+
+zone "maruan.sri.iesiliberis.com" {
+        type master;
+        file "/etc/bind/zones/db.maruan.sri.iesiliberis.com";
+        key-directory "/etc/bind/keys";
+        auto-dnssec maintain;
+        inline-signing yes;
+        allow-update { key DDNS_UPDATE; };
+};
+
+zone "2.10.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/zones/db.10.10.2.0";
+        key-directory "/etc/bind/keys";
+        auto-dnssec maintain;
+        inline-signing yes;
+        allow-update { key DDNS_UPDATE; };
+};
