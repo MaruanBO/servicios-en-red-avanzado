@@ -1,0 +1,16 @@
+@ 604800 IN SOA maruan.sri.iesiliberis.com. root.maruan.sri.iesiliberis.com. 10 604800 86400 2419200 604800
+@ 604800 IN NS ns1.maruan.sri.iesiliberis.com.
+@ 604800 IN NS ns2.maruan.sri.iesiliberis.com.
+@ 604800 IN A 10.10.2.100
+@ 604800 IN A 10.10.2.101
+@ 604800 IN AAAA fec0:cafe::100
+@ 604800 IN AAAA fec0:cafe::101
+maruan.sri.iesiliberis.com 86400 IN A 10.10.2.102
+maruan.sri.iesiliberis.com 86400 IN A 10.10.2.105
+maruan.sri.iesiliberis.com 86400 IN A 10.10.2.106
+maruan.sri.iesiliberis.com 86400 IN A 192.168.1.1
+maruan.sri.iesiliberis.com 86400 IN AAAA 2001:db8:bbbb::2
+ns1 604800 IN A 10.10.2.100
+ns1 604800 IN AAAA fec0:cafe::100
+ns2 604800 IN A 10.10.2.101
+ns2 604800 IN AAAA fec0:cafe::101

@@ -1,0 +1,19 @@
+root@maruan:/etc/ldap# ldapadd -x -D 'cn=admin,dc=maruan,dc=sri,dc=iesiliberis,dc=com' -W -f unidadorga.ldif
+Enter LDAP Password:
+adding new entry "ou=people,dc=maruan,dc=sri,dc=iesiliberis,dc=com"
+
+adding new entry "ou=groups,dc=maruan,dc=sri,dc=iesiliberis,dc=com"
+
+root@maruan:/etc/ldap#
+
+root@maruan:/etc/ldap# ldapadd -x -D 'cn=admin,dc=maruan,dc=sri,dc=iesiliberis,dc=com' -W -f user_database.ldif
+Enter LDAP Password:
+adding new entry "uid=usuario,ou=people,dc=maruan,dc=sri,dc=iesiliberis,dc=com"
+
+root@maruan:/etc/ldap# ldapadd -x -D 'cn=admin,dc=maruan,dc=sri,dc=iesiliberis,dc=com' -W -f groups_database.ldif
+Enter LDAP Password:
+adding new entry "cn=grupo1,ou=groups,dc=maruan,dc=sri,dc=iesiliberis,dc=com"
+
+
+
+

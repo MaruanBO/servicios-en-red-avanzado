@@ -1,0 +1,45 @@
+az vm create  --resource-group VM  --name VM-Shell  --image UbuntuLTS --admin-username mar  --ssh-key-value key.pub  --size Standard_D2_v3
+{
+  "fqdns": "",
+  "id": "/subscriptions/e37b123a-da49-4b9d-bd35-62e90b59ead2/resourceGroups/VM/providers/Microsoft.Compute/virtualMachines/VM-Shell",
+  "location": "uksouth",
+  "macAddress": "00-22-48-07-62-3B",
+  "powerState": "VM running",
+  "privateIpAddress": "10.10.1.5",
+  "publicIpAddress": "40.120.39.65",
+  "resourceGroup": "VM",
+  "zones": ""
+}
+
+recurso de red ipv6 ipv4
+marouane@Azure:~$ az network vnet create --name VMNET  --resource-group VM  --location westeurope  --address-prefixes "10.0.0.0/16" "fc01:deca::/48"
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/16",
+        "fc01:deca::/48"
+      ]
+    },
+    "ddosProtectionPlan": null,
+    "dhcpOptions": {
+      "dnsServers": []
+    },
+    "enableDdosProtection": false,
+    "enableVmProtection": false,
+    "etag": "W/\"35c86a9a-c61e-4c33-aafb-c765ef48cf32\"",
+    "id": "/subscriptions/e37b123a-da49-4b9d-bd35-62e90b59ead2/resourceGroups/VM/providers/Microsoft.Network/virtualNetworks/VMNET",
+    "location": "westeurope",
+    "name": "VMNET",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "VM",
+    "resourceGuid": "89161e72-53bc-4301-b195-aa29c4e57176",
+    "subnets": [],
+    "tags": {},
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  }
+}
+https://docs.microsoft.com/es-es/azure/virtual-machines/linux/cli-ps-findimage
+https://docs.microsoft.com/es-es/azure/virtual-machines/linux/tutorial-manage-vm#create-virtual-machine
+https://docs.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest#az-vm-create

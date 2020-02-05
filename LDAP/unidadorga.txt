@@ -1,0 +1,8 @@
+root@maruan:/etc/ldap# cat unidadorga.ldif 
+dn: ou=people,dc=maruan,dc=sri,dc=iesiliberis,dc=com
+objectClass: organizationalUnit
+ou: people
+
+dn: ou=groups,dc=maruan,dc=sri,dc=iesiliberis,dc=com
+objectClass: organizationalUnit
+ou: groups

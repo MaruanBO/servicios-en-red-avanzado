@@ -1,0 +1,12 @@
+root@maruan:/etc/ldap# cat user_database.ldif 
+dn: uid=usuario1,ou=people,dc=maruan,dc=sri,dc=iesiliberis,dc=com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Maruan
+sn: Boukhriss
+userPassword: {SSHA}DPBf4lOYKOSbu5R23a2mkWHUYEowGyE6
+loginShell: /bin/bash
+homeDirectory: /home/users/usuario1
+uidNumber: 3000
+gidNumber: 3000

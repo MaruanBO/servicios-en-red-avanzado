@@ -1,0 +1,6 @@
+root@maruan:/etc/ldap# cat groups_database.ldif 
+dn: cn=usuario1,ou=groups,dc=maruan,dc=sri,dc=iesiliberis,dc=com
+objectClass: posixGroup
+cn: usuario1
+gidNumber: 3000
+memberUid: usuario1
