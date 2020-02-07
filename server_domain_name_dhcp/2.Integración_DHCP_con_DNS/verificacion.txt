@@ -1,0 +1,35 @@
+$ORIGIN .
+$TTL 604800	; 1 week
+maruan.sri.iesiliberis.com IN SOA maruan.sri.iesiliberis.com. root.maruan.sri.iesiliberis.com. (
+				42         ; serial
+				604800     ; refresh (1 week)
+				86400      ; retry (1 day)
+				2419200    ; expire (4 weeks)
+				604800     ; minimum (1 week)
+				)
+			NS	ns1.maruan.sri.iesiliberis.com.
+			NS	ns2.maruan.sri.iesiliberis.com.
+			A	10.10.2.100
+			A	10.10.2.101
+			AAAA	2001:db8:bbbb::100
+			AAAA	2001:db8:bbbb::101
+$ORIGIN maruan.sri.iesiliberis.com.
+$TTL 86400	; 1 day
+maruan.sri.iesiliberis.com A	10.10.2.101
+$TTL 300	; 5 minutes
+database		A	10.10.2.130
+			TXT	"00f9df36fdaec8e48309bc773e7cef34d9"
+debian			A	10.10.2.105
+			TXT	"00f9df36fdaec8e48309bc773e7cef34d9"
+DESKTOP-HEQG7QN		A	10.10.2.134
+			TXT	"31320d4a0da2ee54b9f30089876b769a94"
+$TTL 604800	; 1 week
+ns1			A	10.10.2.100
+			AAAA	fec0:cafe::100
+ns2			A	10.10.2.101
+			AAAA	fec0:cafe::101
+$TTL 300	; 5 minutes
+test			A	10.10.2.105
+			TXT	"00f9df36fdaec8e48309bc773e7cef34d9"
+tyr			A	10.10.2.130
+			TXT	"00f9df36fdaec8e48309bc773e7cef34d9"
