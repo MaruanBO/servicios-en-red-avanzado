@@ -6,7 +6,9 @@ import re
 def menu():
         print("1. Reservar direccion ip")
         print("2. Modificar reserva")
-        print("3. Salir")
+        print("3. Eliminar reserva")
+        print("4. Salir")
+
 
 class validate: #clase register tiene 2 metodos ipv4 y mac realizan un regex para los datos introducidos en los campos devolviendo true o false, cortesia de cristina.
         def ipv4(self,ipv4):
@@ -47,6 +49,18 @@ class register:
                 file_mod.close()
                 print ">> Datos modificados correctamente"
 
+        def delReserv(self,host,mac,ip): #Bucle para recorrer una fila en concreto por el valor entregado y cambiarlo por un campo vacio
+                                         #De no hacerlo asi modificaremos el fichero introduciendo en el tres veces los valores que ya existen.
+                for line in fileinput.input('/etc/dhcp/dhcpd.conf', inplace=1):
+                        sys.stdout.write(line.replace('host '+host+' {', ''))
+                for line in fileinput.input('/etc/dhcp/dhcpd.conf', inplace=1):
+                        sys.stdout.write(line.replace('hardware ethernet '+mac+';', ''))
+                for line in fileinput.input('/etc/dhcp/dhcpd.conf', inplace=1):
+                        sys.stdout.write(line.replace('fixed-address '+ip+';}', ''))
+
+                print ">> Datos modificados correctamente"
+
+
 
 # Bucle que se rompe si no seleccionas ninguna opcion
 while True:
@@ -79,11 +93,18 @@ while True:
                         mod.modReservIp(h_old,h_new)
                 else:
                         print (">> Direccion ip invalida")
-        elif eligio==3:
+ 	elif eligio==3:
+                host=raw_input("- Host a eliminar: ")
+                delIp=raw_input("- Direccion ip de la reserva a eliminar: ")
+                delMac=raw_input("- Direccion mac a eliminar: ")
+                mod=register()
+                mod.delReserv(host,delMac,delIp)
+        elif eligio==4:
                 print (">> Saliendo del programa")
                 break
 
         else:
                 print (">> Opcion incorrecta")
+
 
 
