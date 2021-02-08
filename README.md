@@ -1,2 +1,2 @@
 # SRI
-Aquí se hayan las practicas realizadas por el alumno Maruan Boukhriss para la asignatura Servicios en red.
+Servidor de DNS, Ldap, DHCP dinámico, servidor de correo, proxmox, apache, dnssec etc.. todo automatizado con python
